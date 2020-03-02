@@ -1,0 +1,33 @@
+@import "normalize.css";
+
+html, body { height: 100%; margin: 0; background-color: purple;}
+
+.center-block h4{
+   float: none;
+   display: block;
+   margin: 0 auto;
+   text-align: center;
+   margin-left: auto; 
+   margin-right: auto; 
+   height: 120px;
+   width: auto;
+   color: #000;
+}
+
+.table thead > tr >th:nth-child(1),
+.table tbody > tr >td:nth-child(1){ 
+   display: none; 
+   background-color: green;
+}
+
+
+.center-block  .copyNow{
+   padding: 5px 8px;
+   float: right;
+   position: relative;                                                         
+}    
+
+.center-block .copyNow:hover {
+   background-color: #000;
+   color: white;
+} 
