@@ -1,16 +1,14 @@
 @import "normalize.css";
 
-html, body { height: 100%; margin: 0; background-color: purple;}
+html, body { height: 100%; margin: 0; background-color: honeydew;}
+.navbar { background-color: Turquoise; }
 
 .center-block h4{
-   float: none;
-   display: block;
    margin: 0 auto;
-   text-align: center;
+   vertical-align: middle
    margin-left: auto; 
    margin-right: auto; 
-   height: 120px;
-   width: auto;
+   height: 90px;
    color: #000;
 }
 
@@ -20,9 +18,14 @@ html, body { height: 100%; margin: 0; background-color: purple;}
    background-color: green;
 }
 
-
-.center-block  .copyNow{
-   padding: 5px 8px;
+table.dataTable tbody td {
+    padding: 2px 2px;
+}
+.table td {
+    vertical-align: middle;
+}
+.center-block .copyNow{
+   padding: 2px 8px;
    float: right;
    position: relative;                                                         
 }    

@@ -67,10 +67,10 @@
 
    <body>
      
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg">
          <div class="container">
 
-            <a class="navbar-brand" href="#">My Color</a>
+            <a class="navbar-brand" href="index.php">My Color</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
@@ -82,7 +82,7 @@
                   <?php if (!isset($_SESSION['adminLogin']) && !isset($_POST['login'])) { ?>
                      <form action="" method="post">
                         <li class="nav-item active">
-                           <button class="btn btn-success" name="login">Login</button>
+                           <button class="btn btn-sm btn-success" name="login">Login</button>
                         </li>
                      </form>
                   <?php } ?>
@@ -90,7 +90,7 @@
                   <?php if (isset($_SESSION['adminLogin'])) { ?>
                      <form action="" method="post">
                         <li class="nav-item active">
-                           <button style="padding: 10px 30px;" class="btn btn-danger" name="logout">Logout</button>
+                           <button class="px-5 btn btn-sm btn-danger" name="logout">Logout</button>
                         </li>
                      </form>
                   <?php } ?>
@@ -103,25 +103,22 @@
 
    	<div class="container">
          
-         <div class="row justify-content-center mt-4">
+         <div class="row justify-content-center mt-2">
             <div class="col-12 col-lg-6 col-md-4 col-sm-6 col-sm-12 mt-2 mb-2">
                <?php if (isset($_POST['login'])) { ?>
-
                   <form action=" " method="post" >                          
                      <div class="row justify-content-center" class="border">
                         <div class="col-4">
                            <input type="email" name="email" class="form-control" placeholder="Email">
                         </div>  
                         <div class="col-4">
-                           <input type="password" name="password" class="form-control" placeholder="password">
-                        </div>    
-                    
+                           <input type="password" name="password" class="form-control" placeholder="Password">
+                        </div>                    
                         <div class="col-4">
-                           <button class="btn btn-primary" name="loginNow">Submit</button>
+                           <button class="btn btn-sm btn-primary px-4" name="loginNow">Submit</button>
                         </div> 
                      </div>
                   </form>
-
                <?php } ?>
             </div>
          </div>
@@ -136,7 +133,7 @@
                            <input type="text" name="colorName" class="form-control" placeholder="Color Name or Code">
                         </div>  
                         <div class="col-4">
-                           <button class="btn btn-primary" name="colorAdd">Add</button>
+                           <button class="btn btn-sm btn-primary px-4" name="colorAdd">Add</button>
                         </div> 
                      </div>
                   </form>
@@ -145,14 +142,13 @@
             </div>
          </div>
 
-         <div class="row justify-content-center mt-4">
+         <div class="row justify-content-center">
       		<div class="col-12 col-lg-8 col-md-4 col-sm-6 col-sm-12 mt-2 mb-2">
 
                <?php if(isset($_SESSION['Color Status'])) { ?>
                   <div class="alert alert-success">
                      <!-- <strong>Success!</strong> Added successfully. -->
-                     <strong><?= $_SESSION['Color Status'];  ?></strong>
-
+                     <strong><?= $_SESSION['Color Status']; ?></strong>
                   </div>
                <?php } ?>
 
@@ -160,7 +156,7 @@
                   <thead class="thead-dark">
                      <tr>
                         <th>ID</th>
-                        <th>Color/Name</th>
+                        <th>Color : Name</th>
                         <?php if (isset($_SESSION['adminLogin'])) { ?>
                             <th>Action</th>
                         <?php } ?>
@@ -170,21 +166,18 @@
             			<?php while ($colorCode = mysqli_fetch_assoc($allColor)) { ?>
             				<tr>
                            <td><?= $colorCode['id']; ?></td>
-
-                           
                            <td width="90%">
                               <div class="center-block" style="background-color: <?= $colorCode['colorName']; ?>;">
-                                 <button class="copyNow btn btn-primary btn-fill" data-clipboard-target="#copy<?= $colorCode['id']; ?>">Copy</button>				
-               						<h4 id="copy<?= $colorCode['id']; ?>"><?= $colorCode['colorName']; ?></h4>
+                                 <button class="btn btn-sm btn-warning copyNow mt-2 mr-2" data-clipboard-target="#copy<?= $colorCode['id']; ?>" onclick="copy(this); copy2(this);">Copy</button>
+               						<h4 class="colorName" id="copy<?= $colorCode['id']; ?>"><?= $colorCode['colorName']; ?></h4>
                					</div>
                            </td>
 
                            <?php if (isset($_SESSION['adminLogin'])) { ?>
                               <td width="10%">
-                                 <a class="btn btn-info" href="delete.php?id=<?php echo $colorCode['id']; ?>">Delete</a>
+                                 <a class="btn btn-sm btn-info" href="delete.php?id=<?php echo $colorCode['id']; ?>">Delete</a>
                             </td>
                            <?php } ?>
-
                         </tr>   
             			<?php } ?>                  
                  </tbody>
@@ -193,22 +186,19 @@
          </div>
    	</div>
 
-
       <!-- All js -->
-
       <script type="text/javascript" src="assets/js/jquery-3.4.1.min.js"></script>
       <script type="text/javascript" src="assets/js/dataTables.min.js"></script>
       <script type="text/javascript" src="assets/js/clipboard.min.js"></script> 
       <script type="text/javascript" src="assets/js/bootstrap.js"></script>
 
-      <script type="text/javascript">         
-
+      <script type="text/javascript">
          $(document).ready( function () {
             $('.table').DataTable();
          } );
 
          $('.table').DataTable({
-            "lengthMenu": [ [4, 6, 10, 25, 50, -1], [4, 6, 10, 25, 50, "All"] ]
+            "lengthMenu": [ [6, 10, 25, 50, -1], [6, 10, 25, 50, "All"] ]
          });  
 
          var table = $('.table').DataTable();
@@ -229,6 +219,23 @@
              console.error('Action:', e.action);
              console.error('Trigger:', e.trigger);
          });
+      </script>
+
+      <script>
+         function copy2(obj) {
+            obj.style.backgroundColor = "blue";
+            obj.style.color = "#fff";
+            obj.innerHTML = "Copied";
+            // Manual table row background change
+            // document.getElementById("copy").style.backgroundColor = "blue";
+         }
+         $('.table tr').click(function () {
+            // Dynamic table row background change            
+            // $(this).css('background-color', "#D6D5C3");
+         });
+         let copy = function(){
+            // document.getElementById("audio").play()
+         }
       </script>
       
    </body>
